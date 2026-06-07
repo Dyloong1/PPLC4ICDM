@@ -1,4 +1,4 @@
-# PPLC4ICDM — code release for "PPLC: Patch-Pivot Latent Compression for Turbulence at 64×" (anonymous submission, ICDM 2026)
+# PPLC4ICDM — code release for "Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence" (anonymous submission, ICDM 2026)
 
 This repository reproduces every quantitative result, table, and figure
 in the paper. It is intentionally minimal — only the code paths that
@@ -169,7 +169,7 @@ Hosted at an anonymized Zenodo / Hugging Face release (TBD post-rebuttal).
 
 ```bibtex
 @inproceedings{pplc2026,
-  title     = {PPLC: Patch-Pivot Latent Compression for Turbulence at 64×},
+  title     = {Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence},
   author    = {Anonymous},
   booktitle = {ICDM},
   year      = {2026}

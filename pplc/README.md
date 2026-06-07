@@ -1,7 +1,7 @@
 # PPLC core
 
-Implementation of the Patch-Pivot Latent Compressor (Section 3 of the
-paper). All four pieces are in this directory:
+Implementation of the Physics-Preserving Latent Compressor (Section 3
+of the paper). All four pieces are in this directory:
 
 | File | What it implements |
 |---|---|

@@ -1,4 +1,4 @@
-"""PPLC — Patch-Pivot Latent Compressor."""
+"""PPLC — Physics-Preserving Latent Compressor."""
 
 from .model import PPLC, PPLCSpatial8, PPLCChannelHeavy
 from .haar_wavelet import haar_forward_3d, haar_inverse_3d

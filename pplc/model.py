@@ -1,4 +1,4 @@
-"""PPLC (Patch-Pivot Latent Compressor) — Section 3 of the paper.
+"""PPLC (Physics-Preserving Latent Compressor) — Section 3 of the paper.
 
 Three pieces:
 
