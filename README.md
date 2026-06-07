@@ -121,20 +121,12 @@ PPLC4ICDM/
 
 ---
 
-## Headline results
+## Reproducing the paper
 
-PPLC headline numbers at 64× compression, zero-shot on JHTDB isotropic
-1024³ frames 800/900/1000 (mean ± std across the 3 frames):
-
-| Method | rel-L2 ↓ | ε ratio (→ 1.0) | Ω ratio (→ 1.0) | β (DNS ≈ −1.50) | rel-div ↓ |
-|---|---:|---:|---:|---:|---:|
-| Wavelet (db4, lev 3) | 0.0525 ± 0.0017 | 0.869 ± 0.006 | 0.828 ± 0.006 | −1.519 ± 0.012 | 6.99 ± 0.20 |
-| WF-VAE-3D | 0.0503 ± 0.0014 | 1.076 ± 0.006 | 1.022 ± 0.006 | −1.517 ± 0.012 | 7.92 ± 0.19 |
-| **PPLC (zero-shot, 256³→1024³)** | **0.0520 ± 0.0011** | **1.191 ± 0.011** | **1.109 ± 0.009** | **−1.522 ± 0.013** | **9.75 ± 0.13** |
-| **PPLC (in-dist., 1024³)** | **0.0492 ± 0.0014** | **1.023 ± 0.008** | **0.965 ± 0.008** | **−1.517 ± 0.011** | **8.19 ± 0.16** |
-
-The complete 13-method × 9-metric table (incl. rel-L1, MAE, RMSE, PSNR,
-inference time) is produced by `scripts/tables/table1_main.py`.
+Quantitative results, tables, and figures are produced by running the
+scripts under `scripts/tables/` and `scripts/figures/` against the
+shipped eval-cache JSONs. See [`REPRODUCING_THE_PAPER.md`](REPRODUCING_THE_PAPER.md)
+for the step-by-step recipe.
 
 ---
 
