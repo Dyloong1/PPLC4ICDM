@@ -1,0 +1,17 @@
+# Headline forecaster: Transformer + CIL on PPLC latents.
+latent_channels: 4
+d_model: 384
+n_heads: 6
+n_layers: 6
+beta_m: 0.5
+tau_train: [10, 20]
+batch_size: 8
+steps_per_epoch: 200
+epochs: 60
+lr: 1.0e-4
+weight_decay: 1.0e-4
+train_end: 800
+test_start: 900
+
+# Path to the frozen PPLC encoder used by the latent forecaster.
+pplc_ckpt: ./checkpoints/pplc_64x.pt

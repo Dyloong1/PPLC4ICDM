@@ -1,0 +1,22 @@
+{
+  "frame_id": 800,
+  "resolution": 1024,
+  "backbone": "wfvae_3d",
+  "ch": 256,
+  "embed_dim": 4,
+  "compression_ratio": 64.0,
+  "n_params": 37783688,
+  "n_params_trainable": 37783688,
+  "ckpt_size_mb": 154.76245307922363,
+  "inference_time_sec": 95.20685338973999,
+  "eps_ratio": 1.0713292869553162,
+  "omega_ratio": 1.0177640850132177,
+  "slope_gt": -1.505711597374058,
+  "slope_recon": -1.5045503394460982,
+  "rel_divergence": 8.095702456919952,
+  "rel_l1_pix_1024": 0.04415491024933861,
+  "rel_l2_pix_1024": 0.051511934711242324,
+  "mae_pix_1024": 0.024133918233873453,
+  "rmse_pix_1024": 0.035067351536324766,
+  "psnr_db_1024": 31.787588737813866
+}

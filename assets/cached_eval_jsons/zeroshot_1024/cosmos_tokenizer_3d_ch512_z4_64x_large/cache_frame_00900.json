@@ -1,0 +1,22 @@
+{
+  "frame_id": 900,
+  "resolution": 1024,
+  "backbone": "cosmos_tokenizer_3d",
+  "ch": 512,
+  "embed_dim": 4,
+  "compression_ratio": 64.0,
+  "n_params": 40337484,
+  "n_params_trainable": 40337484,
+  "ckpt_size_mb": 164.4962568283081,
+  "inference_time_sec": 112.06083631515503,
+  "eps_ratio": 1.3334114740444154,
+  "omega_ratio": 1.1906087241237078,
+  "slope_gt": -1.519107598981243,
+  "slope_recon": -1.5142844321169278,
+  "rel_divergence": 13.12785086740619,
+  "rel_l1_pix_1024": 0.06200388426560002,
+  "rel_l2_pix_1024": 0.07155989241505005,
+  "mae_pix_1024": 0.033634267829615115,
+  "rmse_pix_1024": 0.04825964504115099,
+  "psnr_db_1024": 29.06090528460648
+}

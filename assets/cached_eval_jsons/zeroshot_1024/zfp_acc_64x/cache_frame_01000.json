@@ -1,0 +1,50 @@
+{
+  "frame_id": 1000,
+  "resolution": 1024,
+  "backbone": "zfp_accuracy",
+  "per_chan": [
+    {
+      "chan": 0,
+      "rate_bits": 0.5,
+      "ratio": 63.999984741214575,
+      "comp_bytes": 67108880
+    },
+    {
+      "chan": 1,
+      "rate_bits": 0.5,
+      "ratio": 63.999984741214575,
+      "comp_bytes": 67108880
+    },
+    {
+      "chan": 2,
+      "rate_bits": 0.5,
+      "ratio": 63.999984741214575,
+      "comp_bytes": 67108880
+    },
+    {
+      "chan": 3,
+      "rate_bits": 0.5,
+      "ratio": 63.999984741214575,
+      "comp_bytes": 67108880
+    }
+  ],
+  "compression_ratio_target": 64.0,
+  "compression_ratio_actual": 63.999984741214575,
+  "compression_ratio": 63.999984741214575,
+  "total_orig_bytes": 17179869184,
+  "total_comp_bytes": 268435520,
+  "n_params": 0,
+  "n_params_trainable": 0,
+  "ckpt_size_mb": 0.0,
+  "inference_time_sec": 103.29464221000671,
+  "eps_ratio": 2.0179813921527328,
+  "omega_ratio": 1.6836903970430313,
+  "slope_gt": -1.5298330158989066,
+  "slope_recon": -1.5281155376036129,
+  "rel_divergence": 19.22325177815649,
+  "rel_l1_pix_1024": 0.048075694790916335,
+  "rel_l2_pix_1024": 0.06039815927071711,
+  "mae_pix_1024": 0.026092988330083226,
+  "rmse_pix_1024": 0.04067345868876384,
+  "psnr_db_1024": 30.52245026424453
+}

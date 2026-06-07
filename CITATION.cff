@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the ICDM 2026 paper."
+type: software
+title: "PPLC: Patch-Pivot Latent Compression for Turbulence at 64×"
+authors:
+  - name: Anonymous (ICDM 2026 submission)
+year: 2026
+url: "<filled in for camera-ready>"
+preferred-citation:
+  type: conference-paper
+  title: "PPLC: Patch-Pivot Latent Compression for Turbulence at 64×"
+  authors:
+    - name: Anonymous
+  conference:
+    name: "IEEE International Conference on Data Mining (ICDM)"
+  year: 2026

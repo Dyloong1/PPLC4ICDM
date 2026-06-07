@@ -1,0 +1,82 @@
+{
+  "forecaster": "advloss256_tx_cil",
+  "backbone": "advloss_ae",
+  "compression_ratio": 34.1,
+  "tau_list": [
+    1,
+    5,
+    10,
+    15,
+    20
+  ],
+  "in_distribution_256": {
+    "1": {
+      "eps_ratio_mean": 0.42482223425800536,
+      "eps_ratio_std": 0.0026255087463132715,
+      "omega_ratio_mean": 0.35529430652517124,
+      "slope_recon_mean": -1.4502208744779055,
+      "rmse_pix_mean": 0.13699922151863575,
+      "rmse_pix_std": 0.000779806964241741,
+      "rel_l2_pix_mean": 0.2034116704016924,
+      "rel_l2_pix_std": 0.0010924369382096597,
+      "rel_l2_pix_identity_mean": 0.11575319245457649,
+      "forecaster_vs_identity_skill_pix": -0.0876584779471159,
+      "n_starts": 8
+    },
+    "5": {
+      "eps_ratio_mean": 0.3894756548230972,
+      "eps_ratio_std": 0.001982197518299463,
+      "omega_ratio_mean": 0.32392445973593,
+      "slope_recon_mean": -1.5852398905273195,
+      "rmse_pix_mean": 0.20650040544569492,
+      "rmse_pix_std": 0.0006435132695623228,
+      "rel_l2_pix_mean": 0.3065887913107872,
+      "rel_l2_pix_std": 0.0009037971710212805,
+      "rel_l2_pix_identity_mean": 0.34248075634241104,
+      "forecaster_vs_identity_skill_pix": 0.03589196503162384,
+      "n_starts": 8
+    },
+    "10": {
+      "eps_ratio_mean": 0.36191426808204663,
+      "eps_ratio_std": 0.0022474788656157937,
+      "omega_ratio_mean": 0.29667267049260465,
+      "slope_recon_mean": -1.7292413281752763,
+      "rmse_pix_mean": 0.27263693884015083,
+      "rmse_pix_std": 0.0006102403204215726,
+      "rel_l2_pix_mean": 0.4047585278749466,
+      "rel_l2_pix_std": 0.0008446924817777809,
+      "rel_l2_pix_identity_mean": 0.4530734196305275,
+      "forecaster_vs_identity_skill_pix": 0.0483148917555809,
+      "n_starts": 8
+    },
+    "15": {
+      "eps_ratio_mean": 0.3519606638148025,
+      "eps_ratio_std": 0.0024102591989624677,
+      "omega_ratio_mean": 0.2846533727838444,
+      "slope_recon_mean": -1.7731321142940617,
+      "rmse_pix_mean": 0.30828995630145073,
+      "rmse_pix_std": 0.0007212189966585396,
+      "rel_l2_pix_mean": 0.45777466893196106,
+      "rel_l2_pix_std": 0.0010183282890653554,
+      "rel_l2_pix_identity_mean": 0.5165003091096878,
+      "forecaster_vs_identity_skill_pix": 0.058725640177726746,
+      "n_starts": 8
+    },
+    "20": {
+      "eps_ratio_mean": 0.3462040754249748,
+      "eps_ratio_std": 0.0026727433323046126,
+      "omega_ratio_mean": 0.2774939646992745,
+      "slope_recon_mean": -1.773689002600114,
+      "rmse_pix_mean": 0.3321761153638363,
+      "rmse_pix_std": 0.0009143437480027409,
+      "rel_l2_pix_mean": 0.49324095249176025,
+      "rel_l2_pix_std": 0.001327132733431459,
+      "rel_l2_pix_identity_mean": 0.5630589202046394,
+      "forecaster_vs_identity_skill_pix": 0.06981796771287918,
+      "n_starts": 8
+    }
+  },
+  "forecaster_ckpt": "/media/ydai17/T7 Shield/JHU_turbo_full_time/checkpoints/forecaster_latent64x_tx_cil/best.pt",
+  "tau_coherence_train": 0.226964368204968,
+  "epoch_at_best": 35
+}

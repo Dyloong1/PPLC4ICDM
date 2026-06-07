@@ -1,0 +1,14 @@
+# Pixel Transformer + CIL forecaster.
+in_channels: 4
+d_model: 384
+n_heads: 6
+n_layers: 6
+beta_m: 0.5
+tau_train: [10, 20]
+batch_size: 4
+steps_per_epoch: 150
+epochs: 80
+lr: 1.0e-4
+weight_decay: 1.0e-4
+train_end: 800
+test_start: 900
