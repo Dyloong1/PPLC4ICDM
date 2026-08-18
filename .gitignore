@@ -1,0 +1,34 @@
+# Data — JHTDB frames are huge, never commit
+data/jhtdb/
+data/jhtdb/*.h5
+data/jhtdb/stats.npz
+
+# Checkpoints — fetched via checkpoints/download.sh
+checkpoints/*.pt
+checkpoints/baselines/*.pt
+checkpoints/forecasters/*.pt
+checkpoints/pod_basis_K2048.npy
+
+# Eval cache (regenerated on demand)
+cache/
+
+# Build artifacts
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Output
+tables/
+figures/
+!scripts/figures/
+
+# wandb / tensorboard
+wandb/
+runs/
+events.out.tfevents.*
+
+# OS
+.DS_Store
+Thumbs.db
+MANIFEST.md

@@ -1,0 +1,12 @@
+# Pixel 3D U-Net AR forecaster.
+in_channels: 4
+ch: 64
+ch_mult: [1, 2, 4]
+trained_tau: 10
+batch_size: 4
+steps_per_epoch: 150
+epochs: 80
+lr: 1.0e-4
+weight_decay: 1.0e-4
+train_end: 800
+test_start: 900

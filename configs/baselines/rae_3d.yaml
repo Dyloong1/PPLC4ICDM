@@ -1,0 +1,29 @@
+# RAE-3D (Zheng 2025) — 64x tier on 32^3 patches.
+#
+# RAE freezes an encoder (we use a pre-trained SD-VAE-3D checkpoint) and
+# trains a CNN decoder with latent noise augmentation.
+in_channels: 4
+patch_size: 32
+patches_per_load: 8
+frames_per_batch: 16
+num_workers: 8
+
+model:
+  latent_ch: 4
+  base_ch: 256
+  noise_tau: 0.4
+  # Path to the pre-trained SD-VAE-3D ckpt that supplies the frozen encoder.
+  # Set this to your local sdvae_3d ckpt before training RAE.
+  frozen_encoder_ckpt: ./checkpoints/sdvae_3d.pt
+
+beta_KL: 0.0
+lambda_grad: 0.0
+uses_disc: false
+gen_lr: 1.0e-4
+weight_decay: 1.0e-5
+betas: [0.9, 0.999]
+mixed_precision: bfloat16
+epochs: 60
+warmup_epochs: 5
+patience: 12
+grad_clip: 1.0

@@ -1,0 +1,37 @@
+# PPLC trained at native 1024^3 resolution (Section 5.1 ablation).
+#
+# Same architecture as the headline 64x checkpoint, just trained on
+# 32^3 patches sampled from full 1024^3 frames instead of stride-4-
+# downsampled 256^3 frames. Useful for the zero-shot-vs-native
+# comparison in Figure 2.
+
+arch: spatial8
+latent_channels: 4
+patch_size: 32
+mean_split: true
+haar_level: 3
+discriminator: patch3d
+d_base_ch: 64
+
+beta_KL: 0.01
+lambda_grad: 0.5
+lambda_adv: 0.01
+lambda_consist: 0.1
+consist_shift: 8
+
+optimizer: adamw
+gen_lr: 1.0e-4
+disc_lr: 5.0e-5
+weight_decay: 0.0
+betas: [0.9, 0.999]
+mixed_precision: bfloat16
+epochs: 80
+warmup_epochs: 10
+patience: 15
+
+train_resolution: 1024
+patches_per_load: 8
+frames_per_batch: 16
+
+reassemble: hann
+hann_stride: 16

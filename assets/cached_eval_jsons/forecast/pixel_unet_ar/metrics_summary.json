@@ -1,0 +1,83 @@
+{
+  "forecaster": "pixel256_unet_ar",
+  "backbone": "none (pixel)",
+  "compression_ratio": 1.0,
+  "mode": "AR_rollout",
+  "tau_list": [
+    1,
+    5,
+    10,
+    15,
+    20
+  ],
+  "in_distribution_256": {
+    "1": {
+      "eps_ratio_mean": 0.8874595530144388,
+      "eps_ratio_std": 0.000858658886254929,
+      "omega_ratio_mean": 0.8245477147995118,
+      "slope_recon_mean": -1.4782698196470632,
+      "rmse_pix_mean": 0.04265972040593624,
+      "rmse_pix_std": 0.0004417236206369947,
+      "rel_l2_pix_mean": 0.06330150179564953,
+      "rel_l2_pix_std": 0.0006233035857999649,
+      "rel_l2_pix_identity_mean": 0.11658171191811562,
+      "forecaster_vs_identity_skill_pix": 0.05328021012246609,
+      "n_starts": 4
+    },
+    "5": {
+      "eps_ratio_mean": 0.6354439487745582,
+      "eps_ratio_std": 0.0029579341594530395,
+      "omega_ratio_mean": 0.5189980808362551,
+      "slope_recon_mean": -1.5117593411952506,
+      "rmse_pix_mean": 0.14430628716945648,
+      "rmse_pix_std": 0.0007249730068921644,
+      "rel_l2_pix_mean": 0.21422439441084862,
+      "rel_l2_pix_std": 0.000982314202105652,
+      "rel_l2_pix_identity_mean": 0.34267427772283554,
+      "forecaster_vs_identity_skill_pix": 0.12844988331198692,
+      "n_starts": 4
+    },
+    "10": {
+      "eps_ratio_mean": 0.6802110130219132,
+      "eps_ratio_std": 0.006273341469144091,
+      "omega_ratio_mean": 0.5071800978652792,
+      "slope_recon_mean": -1.5149599606052844,
+      "rmse_pix_mean": 0.2726782411336899,
+      "rmse_pix_std": 0.0006142897377979393,
+      "rel_l2_pix_mean": 0.40478619933128357,
+      "rel_l2_pix_std": 0.0007652273047955381,
+      "rel_l2_pix_identity_mean": 0.4531438648700714,
+      "forecaster_vs_identity_skill_pix": 0.04835766553878784,
+      "n_starts": 4
+    },
+    "15": {
+      "eps_ratio_mean": 0.875488467944171,
+      "eps_ratio_std": 0.012335981748749739,
+      "omega_ratio_mean": 0.618223357172839,
+      "slope_recon_mean": -1.4513394710248566,
+      "rmse_pix_mean": 0.3998267948627472,
+      "rmse_pix_std": 0.00022804451899127379,
+      "rel_l2_pix_mean": 0.5935622304677963,
+      "rel_l2_pix_std": 0.00016468308908291994,
+      "rel_l2_pix_identity_mean": 0.5170433968305588,
+      "forecaster_vs_identity_skill_pix": -0.07651883363723755,
+      "n_starts": 4
+    },
+    "20": {
+      "eps_ratio_mean": 1.157553519055989,
+      "eps_ratio_std": 0.019669601429166305,
+      "omega_ratio_mean": 0.7951186188621828,
+      "slope_recon_mean": -1.401116506171527,
+      "rmse_pix_mean": 0.5187485218048096,
+      "rmse_pix_std": 0.00020191034487655103,
+      "rel_l2_pix_mean": 0.7700259983539581,
+      "rel_l2_pix_std": 0.0004769607929419747,
+      "rel_l2_pix_identity_mean": 0.5633116960525513,
+      "forecaster_vs_identity_skill_pix": -0.20671430230140686,
+      "n_starts": 4
+    }
+  },
+  "forecaster_ckpt": "/media/ydai17/T7 Shield/JHU_turbo_full_time/checkpoints/forecaster_pixel256_unet_ar_v2/best.pt",
+  "epoch_at_best": 23,
+  "tile_size": 128
+}

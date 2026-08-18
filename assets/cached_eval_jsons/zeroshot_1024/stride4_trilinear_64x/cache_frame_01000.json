@@ -1,0 +1,21 @@
+{
+  "frame_id": 1000,
+  "resolution": 1024,
+  "backbone": "stride4_trilinear_64x",
+  "compression_ratio": 64.0,
+  "n_params": 0,
+  "n_params_trainable": 0,
+  "ckpt_size_mb": 0.0,
+  "inference_time_sec": 17.745131015777588,
+  "rel_l1_pix_1024": 0.07420405200603518,
+  "rel_l2_pix_1024": 0.08722198323800784,
+  "mae_pix_1024": 0.04027420889391411,
+  "rmse_pix_1024": 0.05873737836134271,
+  "psnr_db_1024": 27.314436839043164,
+  "eps_ratio": 0.3766307729632944,
+  "omega_ratio": 0.36915885355001665,
+  "slope_gt": -1.5298328377497847,
+  "slope_recon": -1.6339971012706542,
+  "rel_divergence": 2.923512041773692,
+  "upsample_mode": "trilinear"
+}

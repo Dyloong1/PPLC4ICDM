@@ -1,0 +1,22 @@
+{
+  "frame_id": 1000,
+  "resolution": 1024,
+  "backbone": "ltx_video_3d",
+  "ch": 160,
+  "embed_dim": 4,
+  "compression_ratio": 64.0,
+  "n_params": 37402928,
+  "n_params_trainable": 37402928,
+  "ckpt_size_mb": 163.97700023651123,
+  "inference_time_sec": 470.026104927063,
+  "eps_ratio": 0.9880100972154496,
+  "omega_ratio": 0.6765089341338761,
+  "slope_gt": -1.5298328597400919,
+  "slope_recon": -0.47268110139852276,
+  "rel_divergence": 37.36989113017579,
+  "rel_l1_pix_1024": 0.7528024425051757,
+  "rel_l2_pix_1024": 0.7647944321185114,
+  "mae_pix_1024": 0.40858311649660767,
+  "rmse_pix_1024": 0.5150309389940361,
+  "psnr_db_1024": 8.507764904464764
+}

@@ -1,0 +1,21 @@
+{
+  "frame_id": 1000,
+  "resolution": 1024,
+  "backbone": "ours_default",
+  "latent_ch": 32,
+  "compression_ratio": 63.875243664717345,
+  "n_params": 59978656,
+  "n_params_trainable": 59978656,
+  "ckpt_size_mb": 716.727780342102,
+  "inference_time_sec": 39.52675461769104,
+  "eps_ratio": 1.2315759092631244,
+  "omega_ratio": 1.0433261257541424,
+  "slope_gt": -1.529832822904246,
+  "slope_recon": -1.5832703602205753,
+  "rel_divergence": 14.573245152117826,
+  "rel_l1_pix_1024": 0.06849137704545771,
+  "rel_l2_pix_1024": 0.07564646432227508,
+  "mae_pix_1024": 0.037173657664088845,
+  "rmse_pix_1024": 0.05094214590914144,
+  "psnr_db_1024": 28.578453763731623
+}

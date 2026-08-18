@@ -1,0 +1,25 @@
+# ===== Core =====
+torch>=2.3,<3.0
+torchvision>=0.18
+numpy>=1.24
+scipy>=1.11
+h5py>=3.10
+einops>=0.7
+PyYAML>=6.0
+tqdm>=4.66
+
+# ===== Analytic baselines =====
+PyWavelets>=1.5         # baselines/analytic/wavelet
+zfpy>=1.0.0             # baselines/analytic/zfp
+scikit-tensor-py3>=0.4  # baselines/analytic/tt_svd
+
+# ===== Dataset =====
+pyJHTDB>=20240301       # data/download_jhtdb.py
+# SOAP / REST clients used by pyJHTDB; pip resolves these transitively
+
+# ===== Figures =====
+matplotlib>=3.8
+Pillow>=10.0            # PNG slice tiles
+
+# ===== Optional (logging only) =====
+wandb>=0.16             # commented training code defaults to no wandb

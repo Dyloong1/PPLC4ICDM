@@ -1,0 +1,28 @@
+# SD-VAE-3D (Rombach 2022) — 64x tier on 32^3 patches.
+in_channels: 4
+patch_size: 32
+patches_per_load: 8
+frames_per_batch: 16
+num_workers: 8
+
+model:
+  ch: 64
+  ch_mult: "1,2,4"
+  num_res_blocks: 1
+  z_channels: 4
+  embed_dim: 4
+
+beta_KL: 1.0e-6
+lambda_grad: 0.0
+lambda_adv: 0.5
+d_base_ch: 32
+uses_disc: true
+disc_lr: 5.0e-5
+gen_lr: 4.5e-6
+weight_decay: 0.0
+betas: [0.5, 0.9]
+mixed_precision: bfloat16
+epochs: 60
+warmup_epochs: 5
+patience: 12
+grad_clip: 1.0

@@ -1,0 +1,87 @@
+{
+  "method_order": [
+    "GT",
+    "Ours",
+    "OursN1024",
+    "Stride4",
+    "POD",
+    "Wavelet",
+    "ZFP",
+    "TT_SVD",
+    "SDVAE",
+    "DCAE",
+    "RAE",
+    "WFVAE",
+    "Cosmos",
+    "LTX"
+  ],
+  "labels": {
+    "Stride4": "Stride-4",
+    "POD": "POD",
+    "Wavelet": "Wavelet",
+    "ZFP": "ZFP",
+    "TT_SVD": "TT-SVD",
+    "SDVAE": "SD-VAE",
+    "DCAE": "DC-AE",
+    "RAE": "RAE",
+    "WFVAE": "WF-VAE",
+    "Cosmos": "Cosmos",
+    "LTX": "LTX",
+    "Ours": "PPLC\n(zero-shot)",
+    "OursN1024": "PPLC (native 1024³)",
+    "GT": "DNS 1024³"
+  },
+  "families": {
+    "GT": "gt",
+    "Stride4": "null",
+    "POD": "analytic",
+    "Wavelet": "analytic",
+    "ZFP": "analytic",
+    "TT_SVD": "analytic",
+    "SDVAE": "learned",
+    "DCAE": "learned",
+    "RAE": "learned",
+    "WFVAE": "learned",
+    "Cosmos": "learned",
+    "LTX": "learned",
+    "Ours": "ours",
+    "OursN1024": "ours-1024"
+  },
+  "protocol": {
+    "Stride4": "naive",
+    "POD": "naive",
+    "Wavelet": "naive",
+    "ZFP": "naive",
+    "TT_SVD": "naive",
+    "SDVAE": "HANN",
+    "DCAE": "HANN",
+    "RAE": "HANN",
+    "WFVAE": "HANN",
+    "Cosmos": "naive",
+    "LTX": "naive",
+    "Ours": "HANN",
+    "OursN1024": "HANN",
+    "GT": "—"
+  },
+  "frame_id": 800,
+  "zoom": {
+    "x": 288,
+    "y": 384,
+    "size": 160
+  },
+  "family_color": {
+    "gt": "black",
+    "null": "#888",
+    "analytic": "#1e8449",
+    "learned": "#1a5490",
+    "ours": "#c0392b",
+    "ours-1024": "#8e44ad"
+  },
+  "family_marker": {
+    "null": "X",
+    "analytic": "s",
+    "learned": "o",
+    "ours": "*",
+    "ours-1024": "D"
+  }
+}

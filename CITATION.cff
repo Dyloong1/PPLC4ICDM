@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+type: software
+title: "Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence"
+authors:
+  - family-names: Dai
+    given-names: Yilong
+  - family-names: Sun
+    given-names: Yiming
+  - family-names: Chen
+    given-names: Yiheng
+  - family-names: Wang
+    given-names: Ziyi
+  - family-names: Chen
+    given-names: Shengyu
+  - family-names: Jia
+    given-names: Xiaowei
+  - family-names: Yu
+    given-names: Runlong
+year: 2026
+url: "https://github.com/Dyloong1/PPLC4ICDM"
+identifiers:
+  - type: other
+    value: "arXiv:2606.21781"
+    description: "arXiv preprint"
+preferred-citation:
+  type: conference-paper
+  title: "Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence"
+  authors:
+    - family-names: Dai
+      given-names: Yilong
+    - family-names: Sun
+      given-names: Yiming
+    - family-names: Chen
+      given-names: Yiheng
+    - family-names: Wang
+      given-names: Ziyi
+    - family-names: Chen
+      given-names: Shengyu
+    - family-names: Jia
+      given-names: Xiaowei
+    - family-names: Yu
+      given-names: Runlong
+  conference:
+    name: "IEEE International Conference on Data Mining (ICDM)"
+  year: 2026
+  url: "https://arxiv.org/abs/2606.21781"

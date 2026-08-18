@@ -1,0 +1,14 @@
+# Latent 3D U-Net AR forecaster.
+latent_channels: 4
+ch: 128
+ch_mult: [1, 2, 2]
+trained_tau: 10
+batch_size: 4
+steps_per_epoch: 200
+epochs: 60
+lr: 1.0e-4
+weight_decay: 1.0e-4
+train_end: 800
+test_start: 900
+
+pplc_ckpt: ./checkpoints/pplc_64x.pt

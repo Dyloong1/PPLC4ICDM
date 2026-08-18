@@ -1,0 +1,41 @@
+# PPLC headline 64× checkpoint config.
+#
+# Matches the ckpt['args'] of the checkpoint shipped at
+# `checkpoints/pplc_64x.pt` (after `bash checkpoints/download.sh`).
+# Reproduces row "PPLC (zero-shot)" in Table 1.
+
+# ===== Architecture =====
+arch: spatial8                  # 4 channels × 8³ spatial latent → 64× tier
+latent_channels: 4
+patch_size: 32
+mean_split: true                # per-patch mean stored exactly
+haar_level: 3                   # reversible 3D Haar front-end
+discriminator: patch3d          # 3D patch discriminator (hinge)
+d_base_ch: 64
+
+# ===== Loss weights (selected by 256³ ablation grid before any 1024³ eval) =====
+beta_KL: 0.01
+lambda_grad: 0.5
+lambda_adv: 0.01
+lambda_consist: 0.1
+consist_shift: 8                # circular shift in voxels
+
+# ===== Optimization =====
+optimizer: adamw
+gen_lr: 1.0e-4
+disc_lr: 5.0e-5
+weight_decay: 0.0
+betas: [0.9, 0.999]
+mixed_precision: bfloat16
+epochs: 80
+warmup_epochs: 10
+patience: 15
+
+# ===== Data =====
+train_resolution: 256           # 256³ frames (stride-4 from JHTDB 1024³)
+patches_per_load: 8
+frames_per_batch: 32            # effective batch = 32 × 8 = 256 patches
+
+# ===== Reassembly at eval time =====
+reassemble: hann                # headline reconstruction-quality variant
+hann_stride: 16                 # half-stride → 2³ patch coverage
