@@ -2,12 +2,12 @@
 <h1 align="center"><strong>🌀 Physics-Preserving Latent Compression for<br>Zero-Shot Resolution Transfer in 3D Turbulence</strong></h1>
   <p align="center">
     <a href="https://scholar.google.com/citations?user=GsTyeUMAAAAJ&hl=en">Yilong Dai</a><sup>1</sup>,
-    <a>Yiming Sun</a><sup>2</sup>,
+    <a href="https://ymsun99.github.io/">Yiming Sun</a><sup>2</sup>,
     <a>Yiheng Chen</a><sup>1</sup>,
-    <a>Ziyi Wang</a><sup>3</sup>,
-    <a>Shengyu Chen</a><sup>4</sup>,
+    <a href="https://www.zoe-wang.com/">Ziyi Wang</a><sup>3</sup>,
+    <a href="https://www.linkedin.com/in/shengyuchen/">Shengyu Chen</a><sup>4</sup>,
     <a href="https://scholar.google.com/citations?user=mIvajOgAAAAJ&hl=en">Xiaowei Jia</a><sup>2</sup>,
-    <a>Runlong Yu</a><sup>1,&dagger;</sup>
+    <a href="https://runlongyu.github.io/">Runlong Yu</a><sup>1,&dagger;</sup>
     <br>
     <sup>1</sup>The University of Alabama &nbsp;·&nbsp;
     <sup>2</sup>Rutgers University &nbsp;·&nbsp;
