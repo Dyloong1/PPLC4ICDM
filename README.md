@@ -3,7 +3,7 @@
   <p align="center">
     <a href="https://scholar.google.com/citations?user=GsTyeUMAAAAJ&hl=en">Yilong Dai</a><sup>1</sup>,
     <a href="https://ymsun99.github.io/">Yiming Sun</a><sup>2</sup>,
-    <a>Yiheng Chen</a><sup>1</sup>,
+    <a href="https://scholar.google.com/citations?hl=en&user=bfian1QAAAAJ">Yiheng Chen</a><sup>1</sup>,
     <a href="https://www.zoe-wang.com/">Ziyi Wang</a><sup>3</sup>,
     <a href="https://www.linkedin.com/in/shengyuchen/">Shengyu Chen</a><sup>4</sup>,
     <a href="https://scholar.google.com/citations?user=mIvajOgAAAAJ&hl=en">Xiaowei Jia</a><sup>2</sup>,
