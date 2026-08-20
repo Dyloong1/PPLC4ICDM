@@ -18,10 +18,9 @@ __pycache__/
 *.pyo
 .ipynb_checkpoints/
 
-# Output
-tables/
-figures/
-!scripts/figures/
+# Output (root-level only; assets/figures and scripts/figures are tracked)
+/tables/
+/figures/
 
 # wandb / tensorboard
 wandb/

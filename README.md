@@ -1,56 +1,176 @@
 <p align="center">
 <h1 align="center"><strong>🌀 Physics-Preserving Latent Compression for<br>Zero-Shot Resolution Transfer in 3D Turbulence</strong></h1>
   <p align="center">
-    <a>Yilong Dai,</a>
-    <a>Yiming Sun,</a>
-    <a>Yiheng Chen,</a>
-    <a>Ziyi Wang,</a>
-    <a>Shengyu Chen,</a>
-    <a>Xiaowei Jia,</a>
-    <a>Runlong Yu<sup>&dagger;</sup></a>
+    <a href="https://scholar.google.com/citations?user=GsTyeUMAAAAJ&hl=en">Yilong Dai</a><sup>1</sup>,
+    <a>Yiming Sun</a><sup>2</sup>,
+    <a>Yiheng Chen</a><sup>1</sup>,
+    <a>Ziyi Wang</a><sup>3</sup>,
+    <a>Shengyu Chen</a><sup>4</sup>,
+    <a href="https://scholar.google.com/citations?user=mIvajOgAAAAJ&hl=en">Xiaowei Jia</a><sup>2</sup>,
+    <a>Runlong Yu</a><sup>1,&dagger;</sup>
     <br>
-    <sup>&dagger;</sup>Corresponding author
+    <sup>1</sup>The University of Alabama &nbsp;·&nbsp;
+    <sup>2</sup>Rutgers University &nbsp;·&nbsp;
+    <sup>3</sup>Texas A&amp;M University &nbsp;·&nbsp;
+    <sup>4</sup>University of Pittsburgh
+    <br>
+    <sup>&dagger;</sup>Corresponding author &nbsp;·&nbsp; <code>ryu5@ua.edu</code>
   </p>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2606.21781" target="_blank">
-    <img src="https://img.shields.io/badge/ArXiv-2606.21781-red">
+    <img src="https://img.shields.io/badge/ArXiv-2606.21781-B31B1B?logo=arxiv&logoColor=white">
   </a>
   <a href="https://icdm2026.org" target="_blank">
-    <img src="https://img.shields.io/badge/IEEE%20ICDM-2026-blue">
+    <img src="https://img.shields.io/badge/IEEE%20ICDM-2026-1F6FEB">
+  </a>
+  <a href="https://turbulence.pha.jhu.edu/" target="_blank">
+    <img src="https://img.shields.io/badge/Data-JHTDB-F5A623">
   </a>
   <a href="https://github.com/Dyloong1/PPLC4ICDM/blob/main/LICENSE" target="_blank">
-    <img src="https://img.shields.io/badge/License-MIT-green">
+    <img src="https://img.shields.io/badge/License-MIT-3FB950">
   </a>
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/PyTorch-2.x-EE4C2C?logo=pytorch&logoColor=white">
 </p>
 
-**Accepted at IEEE ICDM 2026.** This repository reproduces every quantitative result, table, and figure
-in the paper. It is intentionally minimal — only the code paths that
-feed the paper are included; ~80 superseded ablations and auxiliary
-physics diagnostics from the working repo are out of scope.
+<p align="center">
+  <img src="assets/figures/method_overview.jpg" width="100%">
+  <br>
+  <em>PPLC compresses each fixed-size patch independently (a), so the same encoder–decoder
+  runs unchanged on a much finer grid at test time (b).</em>
+</p>
+
+> **TL;DR** — Train a compressor on cheap 256³ turbulence, run it **zero-shot on 1024³** at
+> **64× compression**, and keep the physics: dissipation, enstrophy, energy spectrum, and
+> incompressibility all stay close to DNS. The trick is that a fixed-size patch is a
+> *transferable unit* under inertial-range scale similarity — so nothing in the model
+> depends on the global grid size.
 
 ---
 
-## What's reproducible
+## ✨ Highlights
 
-| Asset | Reproduced by |
-|---|---|
-| **Table 1** — 13 methods × 9 metrics, mean ± std across 3 zero-shot 1024³ eval frames | `scripts/tables/table1_main.py` |
-| **Table 2** — PPLC component ablation (channel-heavy → spatial → +consistency → +Hann) | `scripts/tables/table2_ablation.py` |
-| **Table 3** — Compression-ratio sweep (34×, 64×, 128×, 254×) + train-resolution ablation (128³ vs 256³) | `scripts/tables/table3_compression_sweep.py` |
-| **Table 4** — Forecaster comparison (latent + Transformer + direct-τ vs latent + UNet + AR vs pixel ×2) | `scripts/tables/table4_forecaster.py` |
-| **Figure 1** — 4-row × 13-col baseline slice / zoom / error / error-zoom panel, ordered by rel-L2 | `scripts/figures/fig1_baselines_with_error.py` |
-| **Figure 2** — PPLC zero-shot vs PPLC native-1024 slice + diff comparison | `scripts/figures/fig2_zeroshot_vs_native.py` |
-| **Figure 3** — Consistency-loss ablation, energy spectrum E(k) | `scripts/figures/fig3_ablation_consist_spectrum.py` |
-| **Figure 4** — Compression-vs-fidelity Pareto curve | `scripts/figures/fig4_compression_sweep_pareto.py` |
-
-All four figure scripts are also re-runnable from the cached eval
-JSONs and slice NPZ already shipped under `assets/`, so figure
-regeneration is < 60 seconds and needs no GPU.
+- **Zero-shot across resolutions.** Trained only on stride-downsampled 256³ fields; evaluated on
+  native 1024³ frames it never saw. The 4× resolution jump costs **~0.001 rel-L2**.
+- **Beats compressors trained *at* the test resolution.** rel-L2 **0.040** / PSNR **34.17 dB**,
+  ahead of every 1024³-native learned baseline (best: WF-VAE-3D at 0.042 / 33.87 dB).
+- **Physics stays put.** Enstrophy ratio **Ω = 1.023** (closest to 1 of any method) and the three
+  large-scale integral quantities *K, L, Re<sub>λ</sub>* rank **first** (0.999 / 1.001 / 0.982 vs DNS).
+- **Fast.** A full 1024³ field reconstructs in **47 s** on one consumer GPU — ~2× faster than the
+  strongest learned baseline.
+- **A latent you can compute in.** Forecasting *inside* the latent beats pixel space by a wide
+  margin (FSS **+0.070** vs **−0.110** with the same Transformer backbone).
+- **Cheap data pipeline.** The 256³ training set is 251 GB instead of 15.7 TB — exactly 64× smaller.
 
 ---
 
-## Quick start (eval pretrained models, no GPU training)
+## 📊 Main results — 64× compression, zero-shot on 1024³
+
+Reconstruction and physics fidelity in one table. ε and Ω target **1**; **bold** = best,
+<u>underline</u> = second. This is Table I of the paper.
+
+| Method | rel-L1 ↓ | rel-L2 ↓ | RMSE ↓ | PSNR ↑ | ε →1 | Ω →1 | \|Δβ\| ↓ | ∇·u ↓ | Time(s) ↓ |
+|---|---|---|---|---|---|---|---|---|---|
+| *Per-frame analytic* ||||||||||
+| Stride-4 <sup>♯</sup> | 0.076 | 0.090 | 0.061 | 27.04 | 0.369 | 0.362 | 0.104 | **2.99** | **18** |
+| POD | 0.056 | 0.063 | 0.042 | 30.19 | 1.205 | 1.153 | 0.005 | 7.75 | 160 |
+| Wavelet (db4, lvl 3) | 0.050 | 0.052 | 0.035 | 31.69 | 0.869 | 0.828 | **0.001** | 6.99 | 664 |
+| ZFP | 0.050 | 0.062 | 0.042 | 30.25 | 2.019 | 1.684 | 0.002 | 19.76 | 151 |
+| TT-SVD / MPS (bond 9) | 0.118 | 0.131 | 0.088 | 23.83 | 1.064 | 0.879 | 0.362<sup>‡</sup> | 15.94<sup>‡</sup> | 427 |
+| *ML trained at 1024³* ||||||||||
+| SD-VAE-3D | 0.056 | 0.061 | 0.041 | 30.42 | <u>0.979</u> | 0.957 | 0.029 | 6.02 | 94 |
+| DC-AE-3D | 0.044 | 0.050 | 0.034 | 32.08 | 0.824 | 0.806 | 0.002 | 5.75 | 147 |
+| RAE-3D | 0.104 | 0.108 | 0.073 | 25.42 | 0.400 | 0.393 | 0.128 | 5.92 | 80 |
+| WF-VAE-3D | 0.036 | 0.042 | 0.028 | 33.87 | 0.902 | 0.888 | 0.002 | 5.45 | 95 |
+| Cosmos-CV-3D <sup>♭</sup> | 0.062 | 0.071 | 0.048 | 29.07 | 1.333 | 1.191 | 0.005 | 13.05 | 112 |
+| LTX-Video-VAE-3D <sup>♭</sup> | 0.078 | 0.090 | 0.061 | 27.14 | 1.519 | 1.376 | **0.001** | 12.93 | 474 |
+| *Ours* ||||||||||
+| **PPLC (zero-shot, 256³→1024³)** | <u>0.035</u> | <u>0.040</u> | <u>0.027</u> | <u>34.17</u> | 1.056 | **1.023** | 0.005 | 6.23 | <u>47</u> |
+| *PPLC (trained at 1024³, control)* | **0.032** | **0.039** | **0.026** | **34.39** | **1.016** | <u>0.965</u> | **0.001** | <u>5.04</u> | <u>47</u> |
+
+<sub>Learned rows use the same Hann overlap-add reassembly; analytic rows use their native global transform.
+<sup>♯</sup>Stride-4's low divergence is an artifact of trilinear upsampling (smooth by construction), not fidelity.
+<sup>‡</sup>TT-SVD's |Δβ| and ∇·u come from a legacy spectral operator; ε and Ω are unaffected.
+<sup>♭</sup>Cosmos and LTX-Video are reported with naive reassembly: overlap-add diverges for Cosmos and badly degrades LTX-Video's slope error.</sub>
+
+<p align="center">
+  <img src="assets/figures/metric_panels.png" width="100%">
+  <br>
+  <em>Each panel pairs a reconstruction metric with a physics metric; error bars are one standard
+  deviation over the three test frames. Stars are our two variants — they sit in the favorable
+  corner of every panel. (Paper Figure 2.)</em>
+</p>
+
+---
+
+## 🖼️ Qualitative comparison
+
+Thirteen methods on the same zero-shot 1024³ slice, ordered left → right by decreasing per-slice
+rel-L2. Rows: reconstruction, zoom, error map, zoomed error map.
+
+<p align="center">
+  <img src="assets/figures/qualitative_baselines.jpg" width="100%">
+  <br>
+  <em>Weaker baselines either over-smooth the fine structure or leave a dense error field;
+  PPLC's zoom and error map are the cleanest. (Paper Figure 3.)</em>
+</p>
+
+---
+
+## 🔬 What does zero-shot actually cost?
+
+We train an otherwise identical model **on native 1024³ patches** as a data control. The two differ
+only in training data, so the gap is exactly the price of resolution transfer.
+
+<p align="center">
+  <img src="assets/figures/zeroshot_vs_native.jpg" width="72%">
+  <br>
+  <em>Top: DNS ground truth and the two reconstructions. Bottom: error maps with a magnified inset.
+  Slice errors 0.0475 vs 0.0490 — the residuals differ in texture, not magnitude. (Paper Figure 5.)</em>
+</p>
+
+---
+
+## 📈 Large-scale physics
+
+<p align="center">
+  <img src="assets/figures/integral_quantities.png" width="80%">
+  <br>
+  <em>Total kinetic energy K, integral length scale L, and Taylor-scale Reynolds number Re<sub>λ</sub>,
+  as ratios to DNS (dashed line = ideal). PPLC ranks first on all three even though every baseline
+  is trained natively at 1024³. (Paper Figure 4.)</em>
+</p>
+
+---
+
+## 🧪 Ablation — what the shift-consistency loss buys
+
+Aggregate metrics understate this one. Without the consistency loss the reconstructed spectrum
+develops large spurious oscillations at high wavenumbers — exactly the small-scale content a
+downstream simulator would consume.
+
+<p align="center">
+  <img src="assets/figures/consistency_spectrum.png" width="62%">
+  <br>
+  <em>High-wavenumber tail (shaded): oscillating without the loss, smooth and close to DNS with it.
+  (Paper Figure 6.)</em>
+</p>
+
+| Variant | latent | λ<sub>c</sub> | rel-L2 ↓ | ε →1 | ∇·u ↓ |
+|---|---|---|---|---|---|
+| channel-heavy | 32×4³ | 0 | 0.076 | 1.32 | 14.97 |
+| channel-heavy, +consist | 32×4³ | 0.1 | 0.074 | 1.20 | 14.65 |
+| spatial-layout | 4×8³ | 0 | 0.062 | 1.27 | 17.6 |
+| spatial, +consist (naive) | 4×8³ | 0.1 | 0.052 | 1.19 | 9.75 |
+| **+ Hann (ours)** | **4×8³** | **0.1** | **0.040** | **1.06** | **6.23** |
+
+<sub>Paper Table II. The latent *shape* — not the seam — dominates divergence; the consistency loss
+and the overlap-add then clean up the boundaries at training and test time respectively.</sub>
+
+---
+
+## 🚀 Quick start (evaluate pretrained models, no training)
 
 ```bash
 # 1. Environment
@@ -58,151 +178,135 @@ git clone https://github.com/Dyloong1/PPLC4ICDM.git
 cd PPLC4ICDM
 pip install -r requirements.txt
 
-# 2. Download JHTDB test frames (frames 800, 900, 1000 of isotropic1024coarse)
+# 2. Download JHTDB test frames (800, 900, 1000 of isotropic1024coarse)
 #    Requires a free JHTDB account: https://turbulence.pha.jhu.edu/
 python data/download_jhtdb.py --frames 800 900 1000 --out data/jhtdb/
 
 # 3. Download pretrained checkpoints (~3 GB)
 bash checkpoints/download.sh
 
-# 4. Reproduce Table 1 (~2 hours on RTX 5090; 4 analytic methods are CPU)
+# 4. Reproduce Table I (~2 h on RTX 5090; the 4 analytic methods run on CPU)
 python scripts/eval/zeroshot_1024.py \
-    --method all \
-    --frames 800 900 1000 \
-    --data_dir data/jhtdb/ \
-    --ckpt_dir checkpoints/ \
+    --method all --frames 800 900 1000 \
+    --data_dir data/jhtdb/ --ckpt_dir checkpoints/ \
     --out_dir cache/zeroshot_1024/
 
 python scripts/tables/table1_main.py \
-    --cache_dir cache/zeroshot_1024/ \
-    --out tables/table1.md
+    --cache_dir cache/zeroshot_1024/ --out tables/table1.md
 
-# 5. Render Figure 1 (uses cached slices + eval JSONs; < 60 s, no GPU)
+# 5. Render the qualitative figure (cached slices + eval JSONs; < 60 s, no GPU)
 python scripts/figures/fig1_baselines_with_error.py \
     --cache_dir cache/zeroshot_1024/ \
     --slices assets/slices_z512.npz \
     --out figures/fig1_baselines_with_error.png
 ```
 
-Repeat steps 4–5 with `scripts/tables/table{2,3,4}_*.py` and
-`scripts/figures/fig{2,3,4}_*.py` for the rest.
+Repeat steps 4–5 with `scripts/tables/table{2,3,4}_*.py` and `scripts/figures/fig{2,3,4}_*.py`
+for the rest. **Every figure above regenerates in under a minute from the cached data already
+shipped in `assets/` — no GPU and no JHTDB download needed.**
 
 ---
 
-## Full reproduction (train from scratch)
+## 🔁 What's reproducible
 
-See [REPRODUCING_THE_PAPER.md](REPRODUCING_THE_PAPER.md). One PPLC 64×
-training run is ~24h on a single RTX 5090; the 6 learned baselines
-together are ~6 GPU-days.
+| Paper asset | Reproduced by |
+|---|---|
+| **Table I** — 13 methods × 9 metrics, 3 zero-shot 1024³ frames | `scripts/tables/table1_main.py` |
+| **Table II** — component ablation (channel-heavy → spatial → +consist → +Hann) | `scripts/tables/table2_ablation.py` |
+| **Table III** — compression sweep (34×→254×) + train-resolution ablation | `scripts/tables/table3_compression_sweep.py` |
+| **Table IV** — forecaster comparison (latent vs pixel, direct-τ vs AR) | `scripts/tables/table4_forecaster.py` |
+| **Fig. 3** — qualitative baseline / zoom / error panel | `scripts/figures/fig1_baselines_with_error.py` |
+| **Fig. 5** — zero-shot vs native-1024 comparison | `scripts/figures/fig2_zeroshot_vs_native.py` |
+| **Fig. 6** — consistency-loss energy spectrum | `scripts/figures/fig3_ablation_consist_spectrum.py` |
+| **Compression–fidelity Pareto curve** | `scripts/figures/fig4_compression_sweep_pareto.py` |
+
+This repo is intentionally minimal — only the code paths that feed the paper are included;
+~80 superseded ablations and auxiliary diagnostics from the working repo are out of scope.
 
 ---
 
-## Repo layout
+## 🧠 Method in one minute
+
+| Component | What it does | Why |
+|---|---|---|
+| **Patch-local VAE** | encodes 32³ patches independently | nothing depends on the global grid → resolution transfer |
+| **Mean–fluctuation split** | stores 4 per-patch means exactly, encodes the zero-mean rest | means are lossless and cheap; capacity goes to the turbulent fluctuation |
+| **Haar front-end** | single-level, invertible, parameter-free | shortest orthogonal filters → stays inside the patch, no boundary padding |
+| **Spatial latent 4×8³** | keeps spatial extent instead of folding it into channels | preserves neighborhood structure a downstream simulator needs |
+| **Shift-consistency loss** | penalizes ‖D(E(S<sub>k</sub>x)) − S<sub>k</sub>D(E(x))‖₁ | makes the patch map insensitive to where a boundary falls |
+| **Hann overlap-add** | half-stride decode, windowed sum | blends the seams that survive training; parameter-free, no retraining |
+
+---
+
+## 📂 Repo layout
 
 ```
 PPLC4ICDM/
-├── README.md                   ← you are here
-├── REPRODUCING_THE_PAPER.md    ← step-by-step recipe
-├── INSTALL.md                  ← env setup
-├── requirements.txt            ← Q4.1
-├── LICENSE
-├── CITATION.cff
-│
-├── pplc/                       ← Section 0 of the paper (the method)
-│   ├── model.py                ← spatial-8 4-channel PPLC architecture
-│   ├── haar_wavelet.py         ← reversible level-3 3D Haar front-end
-│   ├── losses.py               ← L1 + grad + KL + adv + consist
-│   ├── reassemble.py           ← naive + Hann overlap-add reassembly
-│   └── dataset.py              ← 32³ patch loader from 256³ frames
+├── pplc/                    ← the method
+│   ├── model.py             ← spatial-8 4-channel PPLC architecture
+│   ├── haar_wavelet.py      ← invertible 3D Haar front-end
+│   ├── losses.py            ← L1 + grad + KL + adversarial + consistency
+│   ├── reassemble.py        ← naive + Hann overlap-add reassembly
+│   └── dataset.py           ← 32³ patch loader from 256³ frames
 │
 ├── baselines/
-│   ├── analytic/               ← Stride-4, POD, Wavelet, ZFP, TT-SVD
-│   └── learned/                ← SD-VAE-3D, DC-AE-3D, RAE-3D, WF-VAE-3D, Cosmos-CV-3D, LTX-Video-VAE-3D
+│   ├── analytic/            ← Stride-4, POD, Wavelet, ZFP, TT-SVD
+│   └── learned/             ← SD-VAE, DC-AE, RAE, WF-VAE, Cosmos, LTX-Video (all 3D)
 │
-├── forecasters/                ← Table 4
-│   ├── latent_tx_cil/          ← latent + Transformer + direct-τ + CIL (β_m=0.5)
-│   ├── latent_unet_ar/         ← latent + UNet + AR (τ=10 trained, AR to τ=20)
-│   ├── pixel_tx_cil/
-│   └── pixel_unet_ar/
-│
-├── physics/                    ← shared evaluation module (apples-to-apples)
-│   ├── metrics.py              ← ε, Ω, β, divergence
-│   ├── spectra.py              ← E(k) radial shell-binned
-│   └── reconstruction_metrics.py  ← rel-L1, rel-L2, MAE, RMSE, PSNR
-│
-├── scripts/
-│   ├── train/                  ← one train.sh per method
-│   ├── eval/                   ← zeroshot_1024.py + in_dist_256.py
-│   ├── tables/                 ← table{1,2,3,4}.py
-│   └── figures/                ← fig{1,2,3,4}.py
-│
-├── configs/                    ← all hyperparameters in YAML (PPLC + 6 baselines + 4 forecasters)
-├── data/                       ← JHTDB downloader + dataset README
-├── checkpoints/                ← pretrained model placeholders + download.sh
-├── assets/                     ← cached slices NPZ + small visualizations
-└── docs/                       ← architecture diagrams, derivations
+├── forecasters/             ← Table IV: latent/pixel × Transformer/UNet
+├── physics/                 ← shared metrics: ε, Ω, β, divergence, E(k)
+├── scripts/                 ← train / eval / tables / figures
+├── configs/                 ← all hyperparameters in YAML
+├── data/                    ← JHTDB downloader
+├── checkpoints/             ← pretrained weights + download.sh
+└── assets/                  ← cached eval JSONs, slice NPZ, README figures
 ```
 
 ---
 
-## Reproducing the paper
+## 🗄️ Dataset
 
-Quantitative results, tables, and figures are produced by running the
-scripts under `scripts/tables/` and `scripts/figures/` against the
-shipped eval-cache JSONs. See [`REPRODUCING_THE_PAPER.md`](REPRODUCING_THE_PAPER.md)
-for the step-by-step recipe.
+JHTDB [`isotropic1024coarse`](https://turbulence.pha.jhu.edu/datasets.aspx) — a public DNS of
+forced homogeneous isotropic turbulence, four channels (u, v, w, p) on a periodic [0, 2π]³ domain
+with ν = 1.85 × 10⁻⁴. We measure Re<sub>λ</sub> ≈ 418 over our evaluation frames.
 
----
+| | Train | Val | Test |
+|---|---|---|---|
+| **Compressor** (PPLC + 6 learned baselines) | frames 0–699, 256³ (stride-4 from 1024³) | 700–799, 256³ | **800 / 900 / 1000 at full 1024³** |
+| **Forecaster** (Table IV) | frames 0–799, 256³ | 800–899, 256³ | 900–999, 256³ |
 
-## Dataset
-
-JHTDB `isotropic1024coarse` — a publicly available DNS of forced
-homogeneous isotropic turbulence at `Re_λ ≈ 433`.
-
-- **Statistics**: 1024 frames at `Δt = 0.05` dimensionless; each frame
-  is `4 × 1024 × 1024 × 1024` (u, v, w, p) float32. Domain `[0, 2π]³`,
-  kinematic viscosity `ν = 1.85 × 10⁻⁴`.
-- **Train / val / test split**:
-  - Compressor: frames 0–700 train (down-sampled to 256³ via stride-4),
-    700–800 val, **800 / 900 / 1000** test at full 1024³.
-  - Forecaster: frames 0–800 train, 800–900 val, 900–1000 test
-    (all at 256³, in-distribution).
-- **Pre-processing**: per-channel z-score normalization, then 32³
-  random patch cropping during training. No data exclusion.
-- **Download**: `python data/download_jhtdb.py` (free JHTDB account
-  required); see [`data/README.md`](data/README.md). Source URL:
-  https://turbulence.pha.jhu.edu/datasets.aspx
+The 1024³ test frames are **never seen during training** — that is what makes the headline
+setting zero-shot. The forecasting study is deliberately in-distribution at 256³ and kept
+separate from the zero-shot claim. Full details in [`data/README.md`](data/README.md).
+- **Storage** — one 1024³ frame is 16 GB in single precision; its stride-4 256³ counterpart
+  is 256 MB. Across the training set: **251 GB instead of 15.7 TB**.
 
 ---
 
-## Pretrained models
+## 💾 Pretrained models
 
-A public checkpoint release (Zenodo / Hugging Face) is being prepared.
-`bash checkpoints/download.sh` fetches:
+A public checkpoint release (Zenodo / Hugging Face) is being prepared. `bash checkpoints/download.sh` fetches:
 
-- `pplc_64x.pt` — PPLC headline checkpoint (zero-shot variant trained on 256³)
-- `pplc_native_1024.pt` — PPLC trained on 1024³ (data control)
-- `baselines/<name>_3d.pt` — six learned baselines (SD-VAE-3D, DC-AE-3D,
-  RAE-3D, WF-VAE-3D, Cosmos-CV-3D, LTX-Video-VAE-3D)
+- `pplc_64x.pt` — headline zero-shot model (trained on 256³)
+- `pplc_native_1024.pt` — the 1024³-trained data control
+- `baselines/<name>_3d.pt` — six learned baselines
 - `forecasters/<name>.pt` — four forecasters
-- `pod_basis_K2048.npy` — precomputed POD basis (~6 GB; optional)
+- `pod_basis_K2048.npy` — precomputed POD basis (~6 GB, optional)
 
 ---
 
-## Citation
+## 📄 Citation
 
 ```bibtex
-@misc{dai2026pplc,
-  title         = {Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence},
-  author        = {Yilong Dai and Yiming Sun and Yiheng Chen and Ziyi Wang and Shengyu Chen and Xiaowei Jia and Runlong Yu},
-  year          = {2026},
-  eprint        = {2606.21781},
-  archivePrefix = {arXiv},
-  primaryClass  = {physics.flu-dyn},
-  url           = {https://arxiv.org/abs/2606.21781}
+@inproceedings{dai2026pplc,
+  title     = {Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence},
+  author    = {Dai, Yilong and Sun, Yiming and Chen, Yiheng and Wang, Ziyi and
+               Chen, Shengyu and Jia, Xiaowei and Yu, Runlong},
+  booktitle = {2026 IEEE International Conference on Data Mining (ICDM)},
+  year      = {2026}
 }
 ```
 
-## License
+## ⚖️ License
 
 MIT. JHTDB data is governed by the [JHTDB Terms of Use](https://turbulence.pha.jhu.edu/).
