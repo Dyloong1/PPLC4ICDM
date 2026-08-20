@@ -298,12 +298,14 @@ A public checkpoint release (Zenodo / Hugging Face) is being prepared. `bash che
 ## 📄 Citation
 
 ```bibtex
-@inproceedings{dai2026pplc,
-  title     = {Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence},
-  author    = {Dai, Yilong and Sun, Yiming and Chen, Yiheng and Wang, Ziyi and
-               Chen, Shengyu and Jia, Xiaowei and Yu, Runlong},
-  booktitle = {2026 IEEE International Conference on Data Mining (ICDM)},
-  year      = {2026}
+@misc{dai2026pplc,
+  title         = {Physics-Preserving Latent Compression for Zero-Shot Resolution Transfer in 3D Turbulence},
+  author        = {Yilong Dai and Yiming Sun and Yiheng Chen and Ziyi Wang and Shengyu Chen and Xiaowei Jia and Runlong Yu},
+  year          = {2026},
+  eprint        = {2606.21781},
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.flu-dyn},
+  url           = {https://arxiv.org/abs/2606.21781}
 }
 ```
 
